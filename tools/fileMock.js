@@ -1,3 +1,5 @@
-// Return an empty string or other mock path to emulate the url that
-// webpack provides via the file-loader
-module.exports = '';
+// Jest config to handle(mock) asset files
+// https://jestjs.io/docs/webpack#handling-static-assets
+const content = 'test-file-stub';
+export const ReactComponent = content;
+export default content;
