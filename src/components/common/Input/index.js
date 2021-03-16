@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { parseInputErrors } from 'utils/helpers';
 
+import './styles.scss';
+
 const Input = ({ label, name, value, onChange, errors, active, touched, ...props }) => {
   // Register field in the form
   useEffect(() => {
@@ -12,17 +14,24 @@ const Input = ({ label, name, value, onChange, errors, active, touched, ...props
   }, []);
 
   return (
-    <div>
+    <div className="input">
       {label && <label htmlFor={name}>{label}</label>}
       <div>
-        <input name={name} value={value} id={name} onChange={onChange} {...props} />
+        <input
+          className="input__box"
+          name={name}
+          value={value}
+          id={name}
+          onChange={onChange}
+          {...props}
+        />
         {touched && errors && (
-          <span>
+          <div className="input__error">
             <FormattedMessage
               id={parseInputErrors(errors)}
               defaultMessage={parseInputErrors(errors)}
             />
-          </span>
+          </div>
         )}
       </div>
     </div>

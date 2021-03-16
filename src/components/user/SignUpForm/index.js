@@ -7,6 +7,7 @@ import { REJECTED, PENDING } from 'constants/actionStatusConstants';
 import Loading from 'components/common/Loading';
 import Input from 'components/common/Input';
 import Select from 'components/common/Select';
+import Button from 'components/common/Button';
 import { signUp as signUpValidations } from 'utils/constraints';
 import {
   useStatus,
@@ -18,6 +19,8 @@ import {
 } from 'hooks';
 import { signUp } from 'state/actions/userActions';
 import { DEFAULT_GENDER_VALUE } from 'constants/constants';
+
+import './styles.scss';
 
 const messages = defineMessages({
   username: { id: 'signup.form.username' },
@@ -102,9 +105,9 @@ export const SignUpForm = ({ onSubmit }) => {
 
   return (
     // eslint-disable-next-line jsx-a11y/no-redundant-roles
-    <form role="form" onSubmit={handleSubmit}>
+    <form role="form" className="sign-up-form" onSubmit={handleSubmit}>
       {status === REJECTED && <strong>{error}</strong>}
-      <div>
+      <div className="sign-up-form__control">
         <Input
           name="username"
           label={intl.formatMessage(messages.username)}
@@ -112,7 +115,7 @@ export const SignUpForm = ({ onSubmit }) => {
           {...inputProps(fields.username)}
         />
       </div>
-      <div>
+      <div className="sign-up-form__control">
         <Input
           name="email"
           label={intl.formatMessage(messages.email)}
@@ -120,7 +123,7 @@ export const SignUpForm = ({ onSubmit }) => {
           {...inputProps(fields.email)}
         />
       </div>
-      <div>
+      <div className="sign-up-form__control">
         <Input
           name="password"
           type="password"
@@ -129,7 +132,7 @@ export const SignUpForm = ({ onSubmit }) => {
           {...inputProps(fields.password)}
         />
       </div>
-      <div>
+      <div className="sign-up-form__control">
         <Input
           name="passwordConfirmation"
           type="password"
@@ -137,7 +140,7 @@ export const SignUpForm = ({ onSubmit }) => {
           {...inputProps(fields.passwordConfirmation)}
         />
       </div>
-      <div>
+      <div className="sign-up-form__control">
         <Select
           name="gender"
           label={intl.formatMessage(messages.gender)}
@@ -145,9 +148,9 @@ export const SignUpForm = ({ onSubmit }) => {
           {...selectProps(fields.gender)}
         />
       </div>
-      <button type="submit">
+      <Button type="submit">
         <FormattedMessage id="login.form.submit" />
-      </button>
+      </Button>
       {status === PENDING && <Loading />}
     </form>
   );

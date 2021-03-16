@@ -1,0 +1,16 @@
+@import 'styles/styles.scss';
+
+.button {
+  width: 180px;
+  height: 37px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+
+  font-family: $font-primary;
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 1.65px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
