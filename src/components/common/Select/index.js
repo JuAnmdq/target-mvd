@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { arrayOf, bool, func, string } from 'prop-types';
+import { arrayOf, bool, func, string, number, shape, oneOfType } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { parseInputErrors } from 'utils/helpers';
 
-const Input = ({ label, name, value, onChange, errors, active, touched, ...props }) => {
+const Select = ({ label, name, value, onChange, errors, active, touched, options, ...props }) => {
   // Register field in the form
   useEffect(() => {
     onChange({ target: { value } }, true);
@@ -15,8 +15,14 @@ const Input = ({ label, name, value, onChange, errors, active, touched, ...props
     <div>
       {label && <label htmlFor={name}>{label}</label>}
       <div>
-        <input name={name} value={value} id={name} onChange={onChange} {...props} />
-        {touched && errors && (
+        <select name={name} value={value} id={name} onChange={onChange} {...props}>
+          {options.map(option => (
+            <option key={option.value} value={option.value} disabled={option.disabled}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {errors && (
           <span>
             <FormattedMessage
               id={parseInputErrors(errors)}
@@ -29,14 +35,20 @@ const Input = ({ label, name, value, onChange, errors, active, touched, ...props
   );
 };
 
-Input.propTypes = {
+Select.propTypes = {
   name: string.isRequired,
+  value: oneOfType([string, number]).isRequired,
   label: string,
-  value: string,
   onChange: func.isRequired,
   errors: arrayOf(string),
   active: bool.isRequired,
-  touched: bool.isRequired
+  touched: bool.isRequired,
+  options: arrayOf(
+    shape({
+      label: string.isRequired,
+      value: oneOfType([string, number]).isRequired
+    })
+  )
 };
 
-export default Input;
+export default Select;

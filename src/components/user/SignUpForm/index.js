@@ -6,18 +6,37 @@ import { REJECTED, PENDING } from 'constants/actionStatusConstants';
 
 import Loading from 'components/common/Loading';
 import Input from 'components/common/Input';
+import Select from 'components/common/Select';
 import { signUp as signUpValidations } from 'utils/constraints';
-import { useStatus, useForm, useValidation, useTextInputProps } from 'hooks';
+import {
+  useStatus,
+  useForm,
+  useValidation,
+  useTextInputProps,
+  useSelectProps,
+  useSelectOptions
+} from 'hooks';
 import { signUp } from 'state/actions/userActions';
+import { DEFAULT_GENDER_VALUE } from 'constants/constants';
 
 const messages = defineMessages({
+  username: { id: 'signup.form.username' },
   email: { id: 'login.form.email' },
+  gender: { id: 'signup.form.gender' },
+  genderDefaultValue: { id: 'signup.form.gender.defaultValue' },
+  genders: {
+    male: { id: 'signup.form.genders.male' },
+    female: { id: 'signup.form.genders.female' }
+  },
   password: { id: 'login.form.password' },
+  passwordPlaceholder: { id: 'signup.form.password.placeholder' },
   passConfirmation: { id: 'signup.form.passconfirmation' }
 });
 
 const fields = {
+  username: 'username',
   email: 'email',
+  gender: 'gender',
   password: 'password',
   passwordConfirmation: 'passwordConfirmation'
 };
@@ -25,6 +44,21 @@ const fields = {
 export const SignUpForm = ({ onSubmit }) => {
   const intl = useIntl();
   const { status, error } = useStatus(signUp);
+  const options = useSelectOptions([
+    {
+      name: intl.formatMessage(messages.genderDefaultValue),
+      id: DEFAULT_GENDER_VALUE,
+      disabled: true
+    },
+    {
+      name: intl.formatMessage(messages.genders.male),
+      id: 'male'
+    },
+    {
+      name: intl.formatMessage(messages.genders.female),
+      id: 'female'
+    }
+  ]);
 
   const validator = useValidation(signUpValidations);
   const {
@@ -55,9 +89,29 @@ export const SignUpForm = ({ onSubmit }) => {
     touched
   );
 
+  const selectProps = useSelectProps(
+    handleValueChange,
+    handleFocus,
+    handleBlur,
+    values,
+    errors,
+    activeFields,
+    touched,
+    DEFAULT_GENDER_VALUE
+  );
+
   return (
-    <form onSubmit={handleSubmit}>
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+    <form role="form" onSubmit={handleSubmit}>
       {status === REJECTED && <strong>{error}</strong>}
+      <div>
+        <Input
+          name="username"
+          label={intl.formatMessage(messages.username)}
+          type="text"
+          {...inputProps(fields.username)}
+        />
+      </div>
       <div>
         <Input
           name="email"
@@ -69,17 +123,26 @@ export const SignUpForm = ({ onSubmit }) => {
       <div>
         <Input
           name="password"
-          label={intl.formatMessage(messages.password)}
           type="password"
+          label={intl.formatMessage(messages.password)}
+          placeholder={intl.formatMessage(messages.passwordPlaceholder)}
           {...inputProps(fields.password)}
         />
       </div>
       <div>
         <Input
           name="passwordConfirmation"
-          label={intl.formatMessage(messages.passConfirmation)}
           type="password"
+          label={intl.formatMessage(messages.passConfirmation)}
           {...inputProps(fields.passwordConfirmation)}
+        />
+      </div>
+      <div>
+        <Select
+          name="gender"
+          label={intl.formatMessage(messages.gender)}
+          options={options}
+          {...selectProps(fields.gender)}
         />
       </div>
       <button type="submit">

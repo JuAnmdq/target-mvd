@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, BrowserRouter } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 import { useSession } from 'hooks';
 import RouteFromPath from 'components/routes/RouteFromPath';
@@ -12,9 +11,6 @@ const App = () => {
 
   return (
     <>
-      <Helmet>
-        <title>RS React Redux Base</title>
-      </Helmet>
       <Header />
       <BrowserRouter>
         <Switch>
