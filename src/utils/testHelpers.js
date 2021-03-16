@@ -1,18 +1,44 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { node } from 'prop-types';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
+import { render as rtlRender } from '@testing-library/react';
 
 import locales from 'locales';
-import reducer from 'state/reducers';
+import httpClient from 'httpClient';
+import applyDefaultInterceptors from 'httpClient/applyDefaultInterceptors';
+import { DEFAULT_LANGUAGE } from 'constants/constants';
+import configureStore from 'state/store/configureStore.prod';
 
-const messages = locales.en;
+const getDefaultStore = initialState => {
+  const { store } = configureStore(initialState, true);
+  return store;
+};
 
-export const withStore = (WrappedComponent /* , store */) => (
-  <MemoryRouter>
-    <IntlProvider locale="en" messages={messages}>
-      <Provider store={createStore(reducer, {})}>{WrappedComponent}</Provider>
-    </IntlProvider>
-  </MemoryRouter>
-);
+export default (
+  ui,
+  {
+    locale = DEFAULT_LANGUAGE,
+    initialState,
+    store = getDefaultStore(initialState),
+    ...options
+  } = {}
+) => {
+  const Wrapper = ({ children }) => {
+    applyDefaultInterceptors(store, httpClient);
+    return (
+      <IntlProvider locale={locale} messages={locales[locale]}>
+        <MemoryRouter>
+          <Provider store={store}>{children}</Provider>
+        </MemoryRouter>
+      </IntlProvider>
+    );
+  };
+
+  Wrapper.propTypes = {
+    children: node.isRequired
+  };
+
+  return rtlRender(ui, { wrapper: Wrapper, ...options });
+};

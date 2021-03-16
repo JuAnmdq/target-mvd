@@ -1,22 +1,16 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import faker from 'faker';
 
-import { withStore } from 'utils/testHelpers';
-
+import render from 'utils/testHelpers';
 import SignUpForm from '.';
 
 const DEFAULT_PROPS = {
   onSubmit: jest.fn()
 };
 
-test('SignUpForm renders without crashing', () => {
-  const { asFragment } = render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
-  expect(asFragment()).toBeDefined();
-});
-
 test('SignUpForm shows the expected form', () => {
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   expect(screen.getByLabelText(/Name/)).toBeInTheDocument();
   expect(screen.getByLabelText(/Email/)).toBeInTheDocument();
@@ -28,7 +22,7 @@ test('SignUpForm shows the expected form', () => {
 });
 
 test('SignUpForm shows exceptions when fields are not presents', () => {
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   fireEvent.submit(screen.getByRole('form'));
 
@@ -42,7 +36,7 @@ test('SignUpForm shows exceptions when fields are not presents', () => {
 });
 
 test('SignUpForm shows an exception when email is not valid', () => {
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   fireEvent.change(screen.getByLabelText(/Email/), { target: { value: 'johndoe@wrongmail' } });
   fireEvent.blur(screen.getByLabelText(/^Email$/));
@@ -53,7 +47,7 @@ test('SignUpForm shows an exception when email is not valid', () => {
 test('SignUpForm shows an exception when password length is smaller than 8 characters', () => {
   const password = faker.internet.password(5);
 
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   const passwordEl = screen.getByLabelText(/^Password$/);
 
@@ -67,7 +61,7 @@ test('SignUpForm shows an exception when passwords fields do not match', () => {
   const password1 = faker.internet.password();
   const password2 = faker.internet.password();
 
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   const confirmPasswordEl = screen.getByLabelText(/^Confirm Password$/);
 
@@ -81,7 +75,7 @@ test('SignUpForm shows an exception when passwords fields do not match', () => {
 });
 
 test('SignUpForm sign up user when send correct user data', async () => {
-  render(withStore(<SignUpForm {...DEFAULT_PROPS} />));
+  render(<SignUpForm {...DEFAULT_PROPS} />);
 
   const username = faker.internet.userName();
   const email = faker.internet.email();

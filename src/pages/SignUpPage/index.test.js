@@ -1,17 +1,16 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import { withStore } from 'utils/testHelpers';
-
+import render from 'utils/testHelpers';
 import SignUpPage from '.';
 
 test('SignUpPage renders without crashing', () => {
-  const { asFragment } = render(withStore(<SignUpPage />));
+  const { asFragment } = render(<SignUpPage />);
   expect(asFragment()).toBeDefined();
 });
 
 test('SignUpForm shows a title, a from and a sign in link and a form', () => {
-  render(withStore(<SignUpPage />));
+  render(<SignUpPage />);
 
   expect(screen.getByRole('heading', { level: 1, name: /Sign Up/i })).toBeInTheDocument();
   expect(screen.getByRole('form')).toBeInTheDocument();
