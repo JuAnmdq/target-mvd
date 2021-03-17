@@ -9,6 +9,9 @@ import Input from 'components/common/Input';
 import { login as loginValidations } from 'utils/constraints';
 import { useStatus, useForm, useValidation, useTextInputProps } from 'hooks';
 import { login } from 'state/actions/userActions';
+import Button from 'components/common/Button';
+
+import './styles.scss';
 
 const messages = defineMessages({
   email: { id: 'login.form.email' },
@@ -53,9 +56,10 @@ export const LoginForm = ({ onSubmit }) => {
   );
 
   return (
-    <form onSubmit={handleSubmit}>
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+    <form role="form" className="login-form" onSubmit={handleSubmit}>
       {status === REJECTED && <strong>{error}</strong>}
-      <div>
+      <div className="login-form__control">
         <Input
           name="email"
           type="email"
@@ -63,7 +67,7 @@ export const LoginForm = ({ onSubmit }) => {
           {...inputProps(fields.email)}
         />
       </div>
-      <div>
+      <div className="login-form__control">
         <Input
           name="password"
           type="password"
@@ -71,9 +75,9 @@ export const LoginForm = ({ onSubmit }) => {
           {...inputProps(fields.password)}
         />
       </div>
-      <button type="submit">
+      <Button type="submit" disabled={status === PENDING}>
         <FormattedMessage id="login.form.submit" />
-      </button>
+      </Button>
       {status === PENDING && <Loading />}
     </form>
   );

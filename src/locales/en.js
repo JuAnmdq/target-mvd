@@ -1,12 +1,17 @@
 export default {
-  'login.title': 'LOGIN',
+  'login.title': 'Login - Target MVD',
+  'login.headingTitle': 'Target MVD',
+  'login.subheadingTitle': 'Find people near you & Connect',
+  'login.info':
+    'Create a  target  wherever on the map, specify your interest: Travel, Dating, Music, etc and start conecting with others who share your interest.',
   'login.signup': 'Sign up',
 
   'login.form.email': 'Email',
   'login.form.password': 'Password',
-  'login.form.submit': 'Sign Up',
+  'login.form.submit': 'Sign In',
 
   'login.forgot_password': 'Forgot your password?',
+  'login.connect_facebook': 'Connect with Facebook',
 
   'signup.title': 'Sign Up - Target MVD',
   'signup.headingTitle': 'SIGN UP',
@@ -18,6 +23,7 @@ export default {
   'signup.form.genders.female': 'Female',
   'signup.form.password.placeholder': 'Min. 8 characters long',
   'signup.form.passconfirmation': 'Confirm Password',
+  'signup.form.submit': 'Sign Up',
 
   'logout.button': 'LOGOUT',
 

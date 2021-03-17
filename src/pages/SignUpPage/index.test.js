@@ -4,11 +4,6 @@ import { screen } from '@testing-library/react';
 import render from 'utils/testHelpers';
 import SignUpPage from '.';
 
-test('SignUpPage renders without crashing', () => {
-  const { asFragment } = render(<SignUpPage />);
-  expect(asFragment()).toBeDefined();
-});
-
 test('SignUpForm shows a title, a from and a sign in link and a form', () => {
   render(<SignUpPage />);
 

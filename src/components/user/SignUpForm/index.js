@@ -149,7 +149,7 @@ export const SignUpForm = ({ onSubmit }) => {
         />
       </div>
       <Button type="submit" disabled={status === PENDING}>
-        <FormattedMessage id="login.form.submit" />
+        <FormattedMessage id="signup.form.submit" />
       </Button>
       {status === PENDING && <Loading />}
     </form>
