@@ -13,14 +13,14 @@
     box-sizing: border-box;
     width: 180px;
     height: 37px;
-    border: 0.5px solid #060606;
+    border: 0.5px solid $border-secondary-color;
     font-family: $font-primary;
     font-weight: 600;
     font-size: 10px;
     text-transform: uppercase;
     text-align-last: center;
     letter-spacing: 1.5px;
-    color: #000000;
+    color: $primary-color;
   }
 
   &__error {
@@ -30,6 +30,6 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.65px;
-    color: #ff0000;
+    color: $danger-color;
   }
 }

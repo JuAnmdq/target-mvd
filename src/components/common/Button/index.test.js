@@ -32,8 +32,6 @@ test('Button should disabled as expected', () => {
   render(<Button {...props} />);
 
   expect(screen.getByRole('button')).toBeDisabled();
-  // expect(screen.getByRole('button').hasAttribute('disabled')).toBe(true);
-  // expect(container.querySelector('button:disabled')).toBeTruthy();
 });
 
 test('Button matches its snapshot', () => {
