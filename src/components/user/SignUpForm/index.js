@@ -148,7 +148,7 @@ export const SignUpForm = ({ onSubmit }) => {
           {...selectProps(fields.gender)}
         />
       </div>
-      <Button type="submit">
+      <Button type="submit" disabled={status === PENDING}>
         <FormattedMessage id="login.form.submit" />
       </Button>
       {status === PENDING && <Loading />}

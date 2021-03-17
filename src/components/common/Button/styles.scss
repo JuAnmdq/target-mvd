@@ -13,4 +13,8 @@
   letter-spacing: 1.65px;
   color: #FFFFFF;
   text-transform: uppercase;
+
+  &:disabled {
+    opacity: 0.3;
+  }
 }
