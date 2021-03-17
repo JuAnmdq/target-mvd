@@ -38,7 +38,6 @@ const LoginPage = () => {
         </h2>
         <div className="login-page__info-wrapper">
           <p>
-            {/* Centrado */}
             <FormattedMessage id="login.info" />
           </p>
         </div>

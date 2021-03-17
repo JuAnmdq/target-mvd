@@ -1,3 +1,5 @@
+@import 'styles/styles.scss';
+
 .layout {
   &__wrapper {
     position: relative;
@@ -16,7 +18,7 @@
     }
 
     &:last-child {
-      background-color: #2FBCF7;
+      background-color: $background-color-app;
     }
   }
 
