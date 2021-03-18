@@ -53,13 +53,13 @@ const useForm = (
   );
 
   const handleValueChange = useCallback(
-    (key, value, isInitialSetup = false) => {
+    (key, value, isInitialSetup = false, isSelect = false) => {
       const newValues = {
         ...values,
         [key]: value
       };
       setValues(newValues);
-      if (validateOnChange) {
+      if ((isSelect && !isInitialSetup) || validateOnChange) {
         runValidations(newValues, !isInitialSetup && key);
       }
     },

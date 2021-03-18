@@ -1,0 +1,45 @@
+@import 'styles/styles.scss';
+
+.layout {
+  &__wrapper {
+    position: relative;
+  }
+
+  &__content {
+    height: 100vh;
+    flex-grow: 1;
+  }
+
+  &__content > * {
+    text-align: center;
+
+    &:first-child {
+      margin-top: 100px;
+    }
+
+    &:last-child {
+      background-color: $background-color-app;
+    }
+  }
+
+  &__hamburguer {
+    position: absolute;
+    top: 28px;
+    left: 22px;
+    cursor: pointer;
+  }
+
+  &__app-store {
+    margin-bottom: 10px;
+  }
+
+  &__socials {
+    > * {
+      display: inline-block;
+
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
+}

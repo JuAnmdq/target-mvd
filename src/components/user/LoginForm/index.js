@@ -6,27 +6,27 @@ import { REJECTED, PENDING } from 'constants/actionStatusConstants';
 
 import Loading from 'components/common/Loading';
 import Input from 'components/common/Input';
-import { signUp as signUpValidations } from 'utils/constraints';
+import { login as loginValidations } from 'utils/constraints';
 import { useStatus, useForm, useValidation, useTextInputProps } from 'hooks';
-import { signUp } from 'state/actions/userActions';
+import { login } from 'state/actions/userActions';
+import Button from 'components/common/Button';
+
+import './styles.scss';
 
 const messages = defineMessages({
   email: { id: 'login.form.email' },
-  password: { id: 'login.form.password' },
-  passConfirmation: { id: 'signup.form.passconfirmation' }
+  password: { id: 'login.form.password' }
 });
 
 const fields = {
   email: 'email',
-  password: 'password',
-  passwordConfirmation: 'passwordConfirmation'
+  password: 'password'
 };
 
-export const SignUpForm = ({ onSubmit }) => {
+export const LoginForm = ({ onSubmit }) => {
   const intl = useIntl();
-  const { status, error } = useStatus(signUp);
-
-  const validator = useValidation(signUpValidations);
+  const { status, error } = useStatus(login);
+  const validator = useValidation(loginValidations);
   const {
     values,
     errors,
@@ -56,42 +56,35 @@ export const SignUpForm = ({ onSubmit }) => {
   );
 
   return (
-    <form onSubmit={handleSubmit}>
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+    <form role="form" className="login-form" onSubmit={handleSubmit}>
       {status === REJECTED && <strong>{error}</strong>}
-      <div>
+      <div className="login-form__control">
         <Input
           name="email"
-          label={intl.formatMessage(messages.email)}
           type="email"
+          label={intl.formatMessage(messages.email)}
           {...inputProps(fields.email)}
         />
       </div>
-      <div>
+      <div className="login-form__control">
         <Input
           name="password"
-          label={intl.formatMessage(messages.password)}
           type="password"
+          label={intl.formatMessage(messages.password)}
           {...inputProps(fields.password)}
         />
       </div>
-      <div>
-        <Input
-          name="passwordConfirmation"
-          label={intl.formatMessage(messages.passConfirmation)}
-          type="password"
-          {...inputProps(fields.passwordConfirmation)}
-        />
-      </div>
-      <button type="submit">
+      <Button type="submit" disabled={status === PENDING}>
         <FormattedMessage id="login.form.submit" />
-      </button>
+      </Button>
       {status === PENDING && <Loading />}
     </form>
   );
 };
 
-SignUpForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: func.isRequired
 };
 
-export default memo(SignUpForm);
+export default memo(LoginForm);

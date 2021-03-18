@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { arrayOf, bool, func, string } from 'prop-types';
+import { arrayOf, bool, func, string, number, shape, oneOfType } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { parseInputErrors } from 'utils/helpers';
 
 import './styles.scss';
 
-const Input = ({ label, name, value, onChange, errors, active, touched, ...props }) => {
+const Select = ({ label, name, value, onChange, errors, active, touched, options, ...props }) => {
   // Register field in the form
   useEffect(() => {
     onChange({ target: { value } }, true);
@@ -14,19 +14,25 @@ const Input = ({ label, name, value, onChange, errors, active, touched, ...props
   }, []);
 
   return (
-    <div className="input">
+    <div className="select">
       {label && <label htmlFor={name}>{label}</label>}
       <div>
-        <input
-          className="input__box"
+        <select
           name={name}
           value={value}
           id={name}
           onChange={onChange}
+          className="select__box"
           {...props}
-        />
-        {touched && errors && (
-          <div className="input__error">
+        >
+          {options.map(option => (
+            <option key={option.value} value={option.value} disabled={option.disabled}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {errors && (
+          <div className="select__error">
             <FormattedMessage
               id={parseInputErrors(errors)}
               defaultMessage={parseInputErrors(errors)}
@@ -38,14 +44,20 @@ const Input = ({ label, name, value, onChange, errors, active, touched, ...props
   );
 };
 
-Input.propTypes = {
+Select.propTypes = {
   name: string.isRequired,
+  value: oneOfType([string, number]).isRequired,
   label: string,
-  value: string,
   onChange: func.isRequired,
   errors: arrayOf(string),
   active: bool.isRequired,
-  touched: bool.isRequired
+  touched: bool.isRequired,
+  options: arrayOf(
+    shape({
+      label: string.isRequired,
+      value: oneOfType([string, number]).isRequired
+    })
+  )
 };
 
-export default Input;
+export default Select;

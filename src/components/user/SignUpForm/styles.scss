@@ -1,0 +1,9 @@
+.sign-up-form {
+  &__control {
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 34px;
+    }
+  }
+}

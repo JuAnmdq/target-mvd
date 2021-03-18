@@ -1,0 +1,88 @@
+@import 'styles/styles.scss';
+
+.login-page {
+  > h1 {
+    margin-bottom: 14px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: $primary-color;
+    text-transform: uppercase;
+  }
+
+  > h2 {
+    margin-bottom: 6px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 18px;
+    color: #212121;
+  }
+
+  &__info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 44px;
+
+    > p {
+      width: 400px;
+      text-align: center;
+      font-family: $font-primary;
+      font-size: 14px;
+      color: $primary-color;
+    }
+  }
+
+  &__logo {
+    margin-bottom: 10px;
+  }
+
+  &__small-link {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 54px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 11px;
+    text-align: center;
+    text-decoration: none;
+    color: $primary-color;
+  }
+
+  &__footer-actions {
+    margin-top: 18px;
+
+    > hr {
+      width: 121px;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid $border-primary-color;
+      padding: 0;
+      margin-bottom: 2px;
+    }
+  }
+
+  &__social-connect {
+    display: block;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $primary-color;
+  }
+
+  &__bottom-link {
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 1.65px;
+    color: $primary-color;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}

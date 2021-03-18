@@ -1,0 +1,36 @@
+@import 'styles/styles.scss';
+
+.sign-up-page {
+  > h1 {
+    margin-bottom: 24px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: $primary-color;
+  }
+
+  &__footer-actions {
+    margin-top: 18px;
+
+    > hr {
+      width: 121px;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid $border-primary-color;
+      padding: 0;
+      margin-bottom: 2px;
+    }
+  }
+
+  &__bottom-link {
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 1.65px;
+    color: $primary-color;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
